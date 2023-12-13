@@ -25,10 +25,10 @@ This process is repeated iteratively until the model generates an end-of-sequenc
 
 Temperature sampling involves adjusting the softmax function during the generation of sequences in natural language processing (NLP) tasks. The softmax function, which converts logits (unscaled log probabilities) into a probability distribution, is defined as:
 
-$\P(y_i) = \frac{e^{\frac{\text{logit}(y_i)}{T}}}{\sum_{j}e^{\frac{\text{logit}(y_j)}{T}}}\$
+$$ P(y_i) = \frac{e^{\frac{\text{logit}(y_i)}{T}}}{\sum_{j}e^{\frac{\text{logit}(y_j)}{T}}} \$$
 
 where:
-- $\P(y_i)\$ is the probability of selecting token $\(y_i\)$,
+- $P(y_i)$ is the probability of selecting token $\(y_i\)$,
 - $\\text{logit}(y_i)\$ is the logit (pre-softmax) value associated with token $\(y_i\)$,
 - \(T\) is the temperature parameter.
 
