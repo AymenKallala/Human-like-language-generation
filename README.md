@@ -13,11 +13,11 @@ The primary goal is to implement these methods to gain a deeper understanding of
 ### Greedy Decoding
 The first intuitive generation method that is also the least efficient.
 
-The probability of generating the next token \( y_t \) given the context of the previously generated tokens \( y_1, y_2, \ldots, y_{t-1} \) is as follows (greedy way):
+The probability of generating the next token $\( y_t \)$ given the context of the previously generated tokens $\( y_1, y_2, \ldots, y_{t-1} \)$ is as follows (greedy way):
 
-\[ P(y_t | y_1, y_2, \ldots, y_{t-1}) = \arg\max_{y_t} P(y_t | y_1, y_2, \ldots, y_{t-1}) \]
+$\[ P(y_t | y_1, y_2, \ldots, y_{t-1}) = \arg\max_{y_t} P(y_t | y_1, y_2, \ldots, y_{t-1}) \]$
 
-In other words, at each decoding step \( t \), the model selects the token \( y_t \) that maximizes the conditional probability given the context of the previously generated tokens.
+In other words, at each decoding step $\( t \)$, the model selects the token $\( y_t \)$ that maximizes the conditional probability given the context of the previously generated tokens.
 
 This process is repeated iteratively until the model generates an end-of-sequence token or reaches a predefined maximum sequence length.
 
