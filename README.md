@@ -15,7 +15,7 @@ The first intuitive generation method that is also the least efficient.
 
 The probability of generating the next token $\( y_t \)$ given the context of the previously generated tokens $\( y_1, y_2, \ldots, y_{t-1} \)$ is as follows (greedy way):
 
-$\[ P(y_t | y_1, y_2, \ldots, y_{t-1}) = \arg\max_{y_t} P(y_t | y_1, y_2, \ldots, y_{t-1}) \]$
+$\ P(y_t | y_1, y_2, \ldots, y_{t-1}) = \arg\max_{y_t} P(y_t | y_1, y_2, \ldots, y_{t-1}) \$
 
 In other words, at each decoding step $\( t \)$, the model selects the token $\( y_t \)$ that maximizes the conditional probability given the context of the previously generated tokens.
 
@@ -25,11 +25,11 @@ This process is repeated iteratively until the model generates an end-of-sequenc
 
 Temperature sampling involves adjusting the softmax function during the generation of sequences in natural language processing (NLP) tasks. The softmax function, which converts logits (unscaled log probabilities) into a probability distribution, is defined as:
 
-$ P(y_i) = \frac{e^{\frac{\text{logit}(y_i)}{T}}}{\sum_{j}e^{\frac{\text{logit}(y_j)}{T}}}$
+$\P(y_i) = \frac{e^{\frac{\text{logit}(y_i)}{T}}}{\sum_{j}e^{\frac{\text{logit}(y_j)}{T}}}\$
 
 where:
-- $\(P(y_i)\)$ is the probability of selecting token $\(y_i\)$,
-- $\(\text{logit}(y_i)\)$ is the logit (pre-softmax) value associated with token $\(y_i\)$,
+- $\P(y_i)\$ is the probability of selecting token $\(y_i\)$,
+- $\\text{logit}(y_i)\$ is the logit (pre-softmax) value associated with token $\(y_i\)$,
 - \(T\) is the temperature parameter.
 
 The temperature parameter \(T\) controls the level of exploration in the sampling process. A higher \(T\) increases the diversity of the generated outputs, while a lower \(T\) focuses the sampling on more probable tokens. The temperature-scaled logits are exponentiated and normalized to obtain the final probability distribution used for sampling. Adjusting the temperature allows practitioners to fine-tune the balance between exploration and exploitation during sequence generation in NLP models.
