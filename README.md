@@ -65,14 +65,14 @@ _The key intuition of Nucleus Sampling is that the vast majority of probability 
 
 1. **Select Nucleus Words:**
    Choose the smallest set of words whose cumulative probability exceeds a predefined threshold, often denoted as $p_{\text{nucleus}}$: 
-   $$\text{nucleus_words} = [w_i : \sum_{j=1}^{i} \text{sorted_probs}_j > p_{nucleus}]$$.
+   $$\text{nucleus_words} = [w_i : \sum_{j=1}^{i} \text{sorted_probs}_j > p_{nucleus}]$$
 
 2. **Normalize Probabilities:**
    Normalize the probabilities for the nucleus words to create a distribution:
-   $$ P_{nucleus}(w_t | context) = \frac{\text{sorted_probs}}_{\text{nucleus_words}}{\sum_{i=1}^{len(\text{nucleus_words})} sorted_probs{\text{nucleus_words}}, i} $$.
+   $$ P_{nucleus}(w_t | context) = \frac{\text{sorted_probs}}_{\text{nucleus_words}}{\sum_{i=1}^{len(\text{nucleus_words})} sorted_probs{\text{nucleus_words}}, i} $$
 
 3. **Sample from Distribution:**
-   Sample a word from the nucleus distribution to obtain the next predicted word: $$$w_{t+1} \sim P_{\text{nucleus}}(w_t | \text{context})$. $$.
+   Sample a word from the nucleus distribution to obtain the next predicted word: $$w_{t+1} \sim P_{\text{nucleus}}(w_t | \text{context})$$.
 
 Now, regarding why nucleus sampling might be preferred over top-k sampling:
 
