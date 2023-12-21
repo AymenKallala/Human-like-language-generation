@@ -49,7 +49,7 @@ The temperature parameter \(T\) controls the level of exploration in the samplin
 
 4. **Normalize Probabilities:**
    Normalize the selected probabilities to create a distribution over the top-k words:
-   $$P_{\text{top-k}}(w_t | \text{context}) = \frac{\text{top\_k\_words}}{\sum_{i=1}^{k} \text{top\_k\_words}_i}$$
+   $$P_{\text{top-k}}(w_t | \text{context}) = \frac{\text{top-k-words}}{\sum_{i=1}^{k} \text{top-k-words}_i}$$
 
 5. **Sample from Distribution:**
    Sample a word from this distribution to obtain the next predicted word: $w_{t+1} \sim P_{\text{top-k}}(w_t | \text{context})$.
