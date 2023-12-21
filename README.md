@@ -59,7 +59,7 @@ The temperature parameter \(T\) controls the level of exploration in the samplin
 
 ### Nucleus Sampling
 
-\quote{_The key intuition of Nucleus Sampling is that the vast majority of probability mass at each time step is concentrated in the nucleus, a small subset of the vocabulary that tends to range between one and a thousand candidates. Instead of relying on a fixed top-k, or using a temperature parameter to control the shape of the distribution without sufficiently suppressing the unreliable tail, the authors propose sampling from the top-p portion of the probability mass, expanding and contracting the candidate pool dynamically._}
+_The key intuition of Nucleus Sampling is that the vast majority of probability mass at each time step is concentrated in the nucleus, a small subset of the vocabulary that tends to range between one and a thousand candidates. Instead of relying on a fixed top-k, or using a temperature parameter to control the shape of the distribution without sufficiently suppressing the unreliable tail, the authors propose sampling from the top-p portion of the probability mass, expanding and contracting the candidate pool dynamically._
 
 
 **Advantages of Nucleus Sampling:**
@@ -69,7 +69,23 @@ The temperature parameter \(T\) controls the level of exploration in the samplin
 
 Nucleus sampling is particularly useful in scenarios where you want to balance between creativity and coherence, adapting to varying degrees of uncertainty in the language generation process.
 
-## Results
+## Examples of Generation
+
+| Prompt    | Greedy Decoding | Temperature Sampling | Top-k Sampling | Nucleus Sampling |
+| -------- | ------- | --------|
+|The capital of France, Paris, is a beautiful city where people are gorgeous and elegant. You get to drink coffee outside |Everyone talks about the food courses... If you think around the block you may find things interesting. I love to try new things."Price: Approx $3-4, $15 gratuity.Wednesday of the 12th Sunday: Some dinner and drinks dancing, feel free to come.' 31. DATE: February 17th 1993, VENUE: Basketballrama GAMES: Wins over Memphis, Dallas, Dallas RESULT|Several cafes have a chance to visit the house of the deceased. 
+Only one word can describe the house of the deceased. 
+The people that passed away fell in love and lived in this house. 
+Demons were living in the house and were possessed by a spirit. 
+There are haunted houses, ghost stories, and even the myth of the witch who haunted the bodies of three men who went into a house and when they came out, one of them was dead|The place has a huge number of restaurants, and a lot of different places to get your food from and to get your drink.   You could have a beer, and the waiter will bring it to your table and serve you something else.   There is no reason why this should not be possible.
+I am happy to say we have been successful in getting the idea for this idea into the open source community, but as you will see in the following video, it isn't a simple |If you are going to do this you should have the same clothes and shoes as the person you are meeting. 
+You should also bring the same tools you will be using. 
+I have used this for years and it works great. 
+Here are some other tools I use. 
+I use a basic blender and a food processor. 
+I also use a cheese grater and a cheese cloth. 
+I have been using a food processor for a few years|
+
 
 ## Experimental Setting
 
