@@ -72,7 +72,7 @@ Nucleus sampling is particularly useful in scenarios where you want to balance b
 ## Examples of Generation
 
 | Prompt    | Greedy Decoding | Temperature Sampling | Top-k Sampling | Nucleus Sampling |
-| -------- | ------- | --------|
+| -------- | ------- | --------| --------| --------|
 |The capital of France, Paris, is a beautiful city where people are gorgeous and elegant. You get to drink coffee outside |Everyone talks about the food courses... If you think around the block you may find things interesting. I love to try new things."Price: Approx $3-4, $15 gratuity.Wednesday of the 12th Sunday: Some dinner and drinks dancing, feel free to come.' 31. DATE: February 17th 1993, VENUE: Basketballrama GAMES: Wins over Memphis, Dallas, Dallas RESULT|Several cafes have a chance to visit the house of the deceased. 
 Only one word can describe the house of the deceased. 
 The people that passed away fell in love and lived in this house. 
