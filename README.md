@@ -65,7 +65,7 @@ _The key intuition of Nucleus Sampling is that the vast majority of probability 
 
 1. **Select Nucleus Words:**
    Choose the smallest set of words whose cumulative probability exceeds a predefined threshold, often denoted as $p_{\text{nucleus}}$: 
-   $$nucleus\_words = { w_i : \sum_{j=1}^{i} sorted\_probs_j > p_{nucleus} }$$.
+   $$nucleus_words = { w_i : \sum_{j=1}^{i} sorted\_probs\_j > p_{nucleus} }$$.
 
 2. **Normalize Probabilities:**
    Normalize the probabilities for the nucleus words to create a distribution:
