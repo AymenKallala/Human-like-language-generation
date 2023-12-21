@@ -59,31 +59,13 @@ The temperature parameter \(T\) controls the level of exploration in the samplin
 
 ### Nucleus Sampling
 
-_The key intuition of Nucleus Sampling is that the vast majority of probability mass at each time step is concentrated in the nucleus, a small subset of the vocabulary that tends to range between one and a thousand candidates. Instead of relying on a fixed top-k, or using a temperature parameter to control the shape of the distribution without sufficiently suppressing the unreliable tail, the authors propose sampling from the top-p portion of the probability mass, expanding and contracting the candidate pool dynamically._
+\quote{_The key intuition of Nucleus Sampling is that the vast majority of probability mass at each time step is concentrated in the nucleus, a small subset of the vocabulary that tends to range between one and a thousand candidates. Instead of relying on a fixed top-k, or using a temperature parameter to control the shape of the distribution without sufficiently suppressing the unreliable tail, the authors propose sampling from the top-p portion of the probability mass, expanding and contracting the candidate pool dynamically._}
 
- Regarding math details, once you have computed the probability for each token and ordering them in descending order (as previously): 
-
-1. **Select Nucleus Words:**
-   Choose the smallest set of words whose cumulative probability exceeds a predefined threshold, often denoted as $p_{\text{nucleus}}$: 
-   $$\text{nucleus_words} = [w_i : \sum_{j=1}^{i} \text{sorted_probs}_j > p_{nucleus}]$$
-
-2. **Normalize Probabilities:**
-  Normalize the probabilities for the nucleus words to create a distribution:
-    $P_{\text{nucleus}}(w_t | \text{context}) = \frac{\text{sorted-probs}_{\text{nucleus-words}}}{\sum_{i=1}^{len(\text{nucleus-words})} \text{sorted-probs}_{\text{nucleus-words}, i}}$.
-
-    $$P_{\text{top-k}}(w_t | \text{context}) = \frac{\text{top-k-words}}{\sum_{i=1}^{k} \text{top-k-words}_i}$$
-
-3. **Sample from Distribution:**
-   Sample a word from the nucleus distribution to obtain the next predicted word: $$w_{t+1} \sim P_{\text{nucleus}}(w_t | \text{context})$$.
-
-Now, regarding why nucleus sampling might be preferred over top-k sampling:
 
 **Advantages of Nucleus Sampling:**
 - **Dynamic Vocabulary Size:** Nucleus sampling adapts to the changing probabilities of words, allowing for a dynamic vocabulary size. This is in contrast to top-k sampling, where the size of the top-k set remains fixed, potentially leading to issues when the true distribution changes.
 
 - **Flexibility in Diversity:** Nucleus sampling naturally adjusts to the diversity of the probability distribution. It can capture both high-probability and lower-probability words, providing a more flexible approach to generating diverse and contextually relevant outputs.
-
-- **Avoidance of Overly Restrictive Cutoffs:** Unlike top-k sampling, which may cut off words with potentially valuable contributions, nucleus sampling includes words based on their cumulative probabilities, avoiding overly restrictive cutoffs.
 
 Nucleus sampling is particularly useful in scenarios where you want to balance between creativity and coherence, adapting to varying degrees of uncertainty in the language generation process.
 
