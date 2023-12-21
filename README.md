@@ -57,6 +57,30 @@ The temperature parameter \(T\) controls the level of exploration in the samplin
 
 ### Nucleus Sampling
 
+The key intuition of Nucleus Sampling is that the vast majority of probability mass at each time step is concentrated in the nucleus, a small subset of the vocabulary that tends to range between one and a thousand candidates. Instead of relying on a fixed top-k, or using a temperature parameter to control the shape of the distribution without sufficiently suppressing the unreliable tail, we propose sampling from the top-p portion of the probability mass, expanding and contracting the candidate pool dynamically. Regarding math details, once you have computed the probability for each token and ordering them in descending order (as previously): 
+
+1. **Select Nucleus Words:**
+   Choose the smallest set of words whose cumulative probability exceeds a predefined threshold, often denoted as $p_{\text{nucleus}}$: 
+   $$\text{nucleus\_words} = \{ w_i : \sum_{j=1}^{i} \text{sorted\_probs}_j > p_{\text{nucleus}}$$.
+
+2. **Normalize Probabilities:**
+   Normalize the probabilities for the nucleus words to create a distribution:
+   \[ P_{\text{nucleus}}(w_t | \text{context}) = \frac{\text{sorted\_probs}_{\text{nucleus\_words}}}{\sum_{i=1}^{\text{len}(\text{nucleus\_words})} \text{sorted\_probs}_{\text{nucleus\_words}, i}} \].
+
+3. **Sample from Distribution:**
+   Sample a word from the nucleus distribution to obtain the next predicted word: \( w_{t+1} \sim P_{\text{nucleus}}(w_t | \text{context}) \).
+
+Now, regarding why nucleus sampling might be preferred over top-k sampling:
+
+**Advantages of Nucleus Sampling:**
+- **Dynamic Vocabulary Size:** Nucleus sampling adapts to the changing probabilities of words, allowing for a dynamic vocabulary size. This is in contrast to top-k sampling, where the size of the top-k set remains fixed, potentially leading to issues when the true distribution changes.
+
+- **Flexibility in Diversity:** Nucleus sampling naturally adjusts to the diversity of the probability distribution. It can capture both high-probability and lower-probability words, providing a more flexible approach to generating diverse and contextually relevant outputs.
+
+- **Avoidance of Overly Restrictive Cutoffs:** Unlike top-k sampling, which may cut off words with potentially valuable contributions, nucleus sampling includes words based on their cumulative probabilities, avoiding overly restrictive cutoffs.
+
+Nucleus sampling is particularly useful in scenarios where you want to balance between creativity and coherence, adapting to varying degrees of uncertainty in the language generation process.
+
 ## Results
 
 ## Experimental Setting
