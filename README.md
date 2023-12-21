@@ -9,6 +9,24 @@ Practical implementation of [The Curious Case of Neural Text Degeneration](https
 This project is a practical demonstration and implementation of the methods discussed in [The Curious Case of Neural Text Degeneration](https://arxiv.org/abs/1904.09751) from scratch, *Nucleus Sampling* being the main contribution of the paper.
 The primary goal is to implement these methods to gain a deeper understanding of the underlying ideas.
 
+## Examples of Generation
+
+| Prompt    | Greedy Decoding | Temperature Sampling | Top-k Sampling | Nucleus Sampling |
+| -------- | ------- | --------| --------| --------|
+|The capital of France, Paris, is a beautiful city where people are gorgeous and elegant. You get to drink coffee outside |Everyone talks about the food courses... If you think around the block you may find things interesting. I love to try new things."Price: Approx $3-4, $15 gratuity.Wednesday of the 12th Sunday: Some dinner and drinks dancing, feel free to come.' 31. DATE: February 17th 1993, VENUE: Basketballrama GAMES: Wins over Memphis, Dallas, Dallas RESULT|Several cafes have a chance to visit the house of the deceased. Only one word can describe the house of the deceased. The people that passed away fell in love and lived in this house. Demons were living in the house and were possessed by a spirit. There are haunted houses, ghost stories, and even the myth of the witch who haunted the bodies of three men who went into a house and when they came out, one of them was dead|The place has a huge number of restaurants, and a lot of different places to get your food from and to get your drink.   You could have a beer, and the waiter will bring it to your table and serve you something else.   There is no reason why this should not be possible. I am happy to say we have been successful in getting the idea for this idea into the open source community, but as you will see in the following video, it isn't a simple |If you are going to do this you should have the same clothes and shoes as the person you are meeting. You should also bring the same tools you will be using. I have used this for years and it works great. Here are some other tools I use. I use a basic blender and a food processor. I also use a cheese grater and a cheese cloth. I have been using a food processor for a few years|
+
+
+## Experimental Setting
+
+### Model Used
+
+The experiments are conducted using a *GPT-2 large* model with approximately 774 M parameters. The model is pre-trained on a vast corpus of English text in a self-supervised fashion. The choice of this model is deliberate – a conscious decision to avoid overly "fancy" models, such as the latest chat models, in order to observe the impact of the generating methods without the influence of pre-existing biases towards "human-like" language generation.
+
+### Prompt and Task
+
+By providing the model with a lot of context, I hope to discriminate better *meaningful* generations from *senseless* ones.
+Since GPT2 was trained on Wikipedia, it certainly has the required knowledge to tell us something interesting, the whole point is now to evaluate how impactful the decoding method is in generating a meaningful text. I fixed the $max\_new\_token$ hyperparameter to 100, note that the generation stops when it reaches the upper limit or when the model generates the End of Sentence token.
+The generation process is constrained by the `max_new_token` hyperparameter set to 100, ensuring that the generation stops either when the upper limit is reached or when the model generates the End of Sentence token.
 
 ## Decoding Methods
 
@@ -68,25 +86,4 @@ _The key intuition of Nucleus Sampling is that the vast majority of probability 
 - **Flexibility in Diversity:** Nucleus sampling naturally adjusts to the diversity of the probability distribution. It can capture both high-probability and lower-probability words, providing a more flexible approach to generating diverse and contextually relevant outputs.
 
 Nucleus sampling is particularly useful in scenarios where you want to balance between creativity and coherence, adapting to varying degrees of uncertainty in the language generation process.
-
-## Examples of Generation
-
-| Prompt    | Greedy Decoding | Temperature Sampling | Top-k Sampling | Nucleus Sampling |
-| -------- | ------- | --------| --------| --------|
-|The capital of France, Paris, is a beautiful city where people are gorgeous and elegant. You get to drink coffee outside |Everyone talks about the food courses... If you think around the block you may find things interesting. I love to try new things."Price: Approx $3-4, $15 gratuity.Wednesday of the 12th Sunday: Some dinner and drinks dancing, feel free to come.' 31. DATE: February 17th 1993, VENUE: Basketballrama GAMES: Wins over Memphis, Dallas, Dallas RESULT|Several cafes have a chance to visit the house of the deceased. Only one word can describe the house of the deceased. The people that passed away fell in love and lived in this house. Demons were living in the house and were possessed by a spirit. There are haunted houses, ghost stories, and even the myth of the witch who haunted the bodies of three men who went into a house and when they came out, one of them was dead|The place has a huge number of restaurants, and a lot of different places to get your food from and to get your drink.   You could have a beer, and the waiter will bring it to your table and serve you something else.   There is no reason why this should not be possible. I am happy to say we have been successful in getting the idea for this idea into the open source community, but as you will see in the following video, it isn't a simple |If you are going to do this you should have the same clothes and shoes as the person you are meeting. You should also bring the same tools you will be using. I have used this for years and it works great. Here are some other tools I use. I use a basic blender and a food processor. I also use a cheese grater and a cheese cloth. I have been using a food processor for a few years|
-
-
-## Experimental Setting
-
-### Model Used
-
-The experiments are conducted using a *GPT-2 large* model with approximately 774 M parameters. The model is pre-trained on a vast corpus of English text in a self-supervised fashion. The choice of this model is deliberate – a conscious decision to avoid overly "fancy" models, such as the latest chat models, in order to observe the impact of the generating methods without the influence of pre-existing biases towards "human-like" language generation.
-
-### Prompt and Task
-
-By providing the model with a lot of context, I hope to discriminate better *meaningful* generations from *senseless* ones.
-Since GPT2 was trained on Wikipedia, it certainly has the required knowledge to tell us something interesting, the whole point is now to evaluate how impactful the decoding method is in generating a meaningful text. I fixed the $max\_new\_token$ hyperparameter to 100, note that the generation stops when it reaches the upper limit or when the model generates the End of Sentence token.
-The generation process is constrained by the `max_new_token` hyperparameter set to 100, ensuring that the generation stops either when the upper limit is reached or when the model generates the End of Sentence token.
-
-## Usage
 
