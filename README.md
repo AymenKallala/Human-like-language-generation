@@ -1,6 +1,8 @@
 # Human-like Language Generation
 Practical implementation of [The Curious Case of Neural Text Degeneration](https://arxiv.org/abs/1904.09751) from scratch.
 
+![alt-text-1](imgs/human_like_generation.png "Image generated on the Real-Time Latent Consistency Model space.")
+
 
 ## Overview
 
@@ -57,18 +59,20 @@ The temperature parameter \(T\) controls the level of exploration in the samplin
 
 ### Nucleus Sampling
 
-The key intuition of Nucleus Sampling is that the vast majority of probability mass at each time step is concentrated in the nucleus, a small subset of the vocabulary that tends to range between one and a thousand candidates. Instead of relying on a fixed top-k, or using a temperature parameter to control the shape of the distribution without sufficiently suppressing the unreliable tail, we propose sampling from the top-p portion of the probability mass, expanding and contracting the candidate pool dynamically. Regarding math details, once you have computed the probability for each token and ordering them in descending order (as previously): 
+_The key intuition of Nucleus Sampling is that the vast majority of probability mass at each time step is concentrated in the nucleus, a small subset of the vocabulary that tends to range between one and a thousand candidates. Instead of relying on a fixed top-k, or using a temperature parameter to control the shape of the distribution without sufficiently suppressing the unreliable tail, the authors propose sampling from the top-p portion of the probability mass, expanding and contracting the candidate pool dynamically._
+
+ Regarding math details, once you have computed the probability for each token and ordering them in descending order (as previously): 
 
 1. **Select Nucleus Words:**
    Choose the smallest set of words whose cumulative probability exceeds a predefined threshold, often denoted as $p_{\text{nucleus}}$: 
-   $$\text{nucleus\_words} = \{ w_i : \sum_{j=1}^{i} \text{sorted\_probs}_j > p_{\text{nucleus}}$$.
+   $$\text{nucleus\_words} = { w_i : \sum_{j=1}^{i} \text{sorted\_probs}_j > p_{\text{nucleus}}}$$.
 
 2. **Normalize Probabilities:**
    Normalize the probabilities for the nucleus words to create a distribution:
-   \[ P_{\text{nucleus}}(w_t | \text{context}) = \frac{\text{sorted\_probs}_{\text{nucleus\_words}}}{\sum_{i=1}^{\text{len}(\text{nucleus\_words})} \text{sorted\_probs}_{\text{nucleus\_words}, i}} \].
+   $$ P_{\text{nucleus}}(w_t | \text{context}) = \frac{\text{sorted\_probs}_{\text{nucleus\_words}}}{\sum_{i=1}^{\text{len}(\text{nucleus\_words})} \text{sorted\_probs}_{\text{nucleus\_words}, i}} $$.
 
 3. **Sample from Distribution:**
-   Sample a word from the nucleus distribution to obtain the next predicted word: \( w_{t+1} \sim P_{\text{nucleus}}(w_t | \text{context}) \).
+   Sample a word from the nucleus distribution to obtain the next predicted word: $$ w_{t+1} \sim P_{\text{nucleus}}(w_t | \text{context}) $$.
 
 Now, regarding why nucleus sampling might be preferred over top-k sampling:
 
