@@ -69,7 +69,7 @@ _The key intuition of Nucleus Sampling is that the vast majority of probability 
 
 2. **Normalize Probabilities:**
   Normalize the probabilities for the nucleus words to create a distribution:
-    $$ P_{\text{nucleus}}(w_t | \text{context}) = \frac{\text{sorted\_probs}_{\text{nucleus\_words}}}{\sum_{i=1}^{\text{len}(\text{nucleus\_words})} \text{sorted\_probs}_{\text{nucleus\_words}, i}} $$.
+    $$ P_{\text{nucleus}}(w_t | \text{context}) = \frac{\text{sorted-probs}_{\text{nucleus-words}}}{\sum_{i=1}^{\text{len}(\text{nucleus-words})} \text{sorted-probs}_{\text{nucleus-words}, i}} $$.
 
 
 3. **Sample from Distribution:**
