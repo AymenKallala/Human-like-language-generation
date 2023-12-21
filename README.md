@@ -15,7 +15,7 @@ The first intuitive generation method that is also the least efficient.
 
 The probability of generating the next token $\( y_t \)$ given the context of the previously generated tokens $\( y_1, y_2, \ldots, y_{t-1} \)$ is as follows (greedy way):
 
-$\ P(y_t | y_1, y_2, \ldots, y_{t-1}) = \arg\max_{y_t} P(y_t | y_1, y_2, \ldots, y_{t-1}) \$
+$$\ P(y_t | y_1, y_2, \ldots, y_{t-1}) = \arg\max_{y_t} P(y_t | y_1, y_2, \ldots, y_{t-1}) \$$
 
 In other words, at each decoding step $\( t \)$, the model selects the token $\( y_t \)$ that maximizes the conditional probability given the context of the previously generated tokens.
 
@@ -36,6 +36,24 @@ The temperature parameter \(T\) controls the level of exploration in the samplin
 
 
 ### Top-K Sampling
+ At each time step, the top k possible next tokens are sampled according to their relative probabilities, then we rescale the probabilities of these top k tokens and sample from them. The authors of the paper actually describe this method as inefficient and leading to too much repetition and non-flexibility regarding the context.
+
+1. **Compute Probabilities:**
+   The model computes probabilities for each word in the vocabulary based on the context: $P(w_t |contex)$.
+
+2. **Sort Probabilities:**
+   Sort the probabilities in descending order.
+
+3. **Select Top-k Words:**
+   Choose the top-k words with the highest probabilities.
+
+4. **Normalize Probabilities:**
+   Normalize the selected probabilities to create a distribution over the top-k words:
+   $P_{\text{top-k}}(w_t | \text{context}) = \frac{\text{top\_k\_words}}{\sum_{i=1}^{k} \text{top\_k\_words}_i}$.
+
+5. **Sample from Distribution:**
+   Sample a word from this distribution to obtain the next predicted word: $w_{t+1} \sim P_{\text{top-k}}(w_t | \text{context})$.
+
 
 ### Nucleus Sampling
 
@@ -49,8 +67,9 @@ The experiments are conducted using a *GPT-2 large* model with approximately 774
 
 ### Prompt and Task
 
-The experiments focus on a generative task using a single open-ended prompt: "The capital of France." This choice is made to minimize bias and evaluate the impact of decoding methods in generating meaningful text. Since GPT-2 has been trained on Wikipedia, it is expected to possess the necessary knowledge to provide interesting responses. The generation process is constrained by the `max_new_token` hyperparameter set to 100, ensuring that the generation stops either when the upper limit is reached or when the model generates the End of Sentence token.
-
+By providing the model with a lot of context, I hope to discriminate better *meaningful* generations from *senseless* ones.
+Since GPT2 was trained on Wikipedia, it certainly has the required knowledge to tell us something interesting, the whole point is now to evaluate how impactful the decoding method is in generating a meaningful text. I fixed the $max\_new\_token$ hyperparameter to 100, note that the generation stops when it reaches the upper limit or when the model generates the End of Sentence token.
+The generation process is constrained by the `max_new_token` hyperparameter set to 100, ensuring that the generation stops either when the upper limit is reached or when the model generates the End of Sentence token.
 
 ## Usage
 
